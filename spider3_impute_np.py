@@ -20,9 +20,9 @@ def run_RNN(inputs, matrix_in, bias, mask):
   # Init
   temp_x = None
   x = inputs
-  output = np.zeros([inputs.shape[0], inputs.shape[1], matrix_in.shape[1]/4])
-  h = np.matrix(np.zeros((inputs.shape[0], matrix_in.shape[1]/4)))
-  c = np.matrix(np.zeros((inputs.shape[0], matrix_in.shape[1]/4)))
+  output = np.zeros([inputs.shape[0], inputs.shape[1], matrix_in.shape[1]//4])
+  h = np.matrix(np.zeros((inputs.shape[0], matrix_in.shape[1]//4)))
+  c = np.matrix(np.zeros((inputs.shape[0], matrix_in.shape[1]//4)))
   #Loop over inputs
   for iterator in range(inputs.shape[1]):
       temp_x = x[:,iterator,:]
@@ -37,7 +37,7 @@ def run_RNN(inputs, matrix_in, bias, mask):
       h = np.multiply(np.tanh(c), special.expit(o))
       output[:,iterator,:] = h
   
-  return (np.multiply(output, np.tile(mask[:,:,None], (1,1,matrix_in.shape[1]/4))), c)
+  return (np.multiply(output, np.tile(mask[:,:,None], (1,1,matrix_in.shape[1]//4))), c)
 
 def revseq(input, lengths):
     for i in range(input.shape[0]):
@@ -62,7 +62,7 @@ def softmax(x):
 
 def num_batches(num_vec, batch_size):
   incomplete_batch = 1 if np.mod(num_vec, batch_size) else 0
-  return num_vec/batch_size+incomplete_batch
+  return num_vec//batch_size+incomplete_batch
 
 def bioinf_output_nonlinearity(output_type, pred):
   # this function applies the nonlinear activation functions for the different output types.
@@ -97,8 +97,8 @@ def brnn_impute(directory_to_saved_network, input_list, output_types, network_si
 
     # Load training data normalisation stats
     fp = open(directory_to_saved_network +
-            '/data_stats_' + scope_str + '.pkl', 'r')
-    feat_mean, feat_var = pickle.load(fp)
+            '/data_stats_' + scope_str + '.pkl', 'rb')
+    feat_mean, feat_var = pickle.load(fp, encoding='latin1')
     fp.close()
 
     test_seq_names, test_feat, feature_length = load_data.load_seqonly_input_wrapper(input_list, feat_mean, feat_var, input_file_dir=input_file_dir, input_file_ext=input_file_ext)
@@ -114,10 +114,10 @@ def brnn_impute(directory_to_saved_network, input_list, output_types, network_si
 
     # Load in data from pickled checkpoint that has already been converted
     # from TensorFlow
-    checkpoint = open(directory_to_saved_network + '/network_best_full.pickle')
+    checkpoint = open(directory_to_saved_network + '/network_best_full.pickle', 'rb')
     # Two calls to pickle to load the two dumps in the file
-    checkpoint_names = pickle.load(checkpoint)
-    checkpoint_data = pickle.load(checkpoint)
+    checkpoint_names = pickle.load(checkpoint, encoding='latin1')
+    checkpoint_data = pickle.load(checkpoint, encoding='latin1')
 
 #    output_weights = checkpoint_data[0]
 #    output_bias = checkpoint_data[6]
