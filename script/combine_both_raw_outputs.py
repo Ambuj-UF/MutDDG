@@ -17,6 +17,6 @@ if __name__ == "__main__":
     header = sys.argv[4]
     combine_two_outputs(output_file, file1, file2, header=header)
   else:
-    print 'invalid number of inputs'
+    print('invalid number of inputs')
   
   

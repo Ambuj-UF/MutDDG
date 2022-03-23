@@ -60,7 +60,7 @@ if __name__ == "__main__":
     input_filename = sys.argv[1]
     output_filename = sys.argv[2]
   else:
-    print 'invalid number of inputs'
+    print('invalid number of inputs')
     exit
   
   convert_raw_file(input_filename, output_filename)
