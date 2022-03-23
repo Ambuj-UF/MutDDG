@@ -4,7 +4,7 @@ import pickle
 import os
 import argparse
 import shutil
-
+import sys
 
 class DDG():
     def __init__(self, sequence, temperature=300, pH=7.0, output="output.txt"):
