@@ -74,7 +74,7 @@ def convert_raw_file(input_filename, seq_filename, output_filename):
                  ('ss8_probc', float),
                  ])
                  
-  readable_data['#'] = np.array(range(1,len(pred_ss)+1))
+  readable_data['#'] = np.array(list(range(1,len(pred_ss)+1)))
   readable_data['AA'] = np.array(aa_list)
   readable_data['pred_ss'] = pred_ss
   readable_data['pred_ss8'] = pred_ss8

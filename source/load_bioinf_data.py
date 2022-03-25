@@ -358,7 +358,7 @@ def pad_list(data_list, max_lengths):
   
   if max_lengths is None:
     # find the lengths + max length of the data
-    lengths = [data_list[i].shape[0] for i in xrange(len(data_list))]
+    lengths = [data_list[i].shape[0] for i in range(len(data_list))]
     max_lengths = max(lengths)
   
   # initialise the array to be all zeros
@@ -439,7 +439,7 @@ def process_inputs_for_one_seq_one_type(data, input_type):
     _input = np.array([blosum_dict[i] for i in data['aa']])
   else:    
     _input = None
-    print "ERROR GETTING INPUT DATA", input_type, "IS NOT VALID"
+    print("ERROR GETTING INPUT DATA", input_type, "IS NOT VALID")
 
   return _input
   
@@ -472,7 +472,7 @@ def get_normalisation_mask_one_type(input_type):
     normalisation_mask = np.ones(20)
   else:    
     normalisation_mask = None
-    print "ERROR GETTING INPUT DATA", input_type, "IS NOT VALID"
+    print("ERROR GETTING INPUT DATA", input_type, "IS NOT VALID")
       
   return normalisation_mask
 
@@ -818,7 +818,7 @@ def process_label_for_one_seq_one_type(data=None, output_type=None):
     pred_label_size = 1
   else:    
     label = None
-    print "ERROR GETTING OUTPUT LABELS ", output_type, " IS NOT VALID"
+    print("ERROR GETTING OUTPUT LABELS ", output_type, " IS NOT VALID")
 
   if data is not None:
     return label, label_encoded, mask, mask_encoded, true_label_size, pred_label_size
