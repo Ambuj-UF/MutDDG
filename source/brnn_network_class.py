@@ -153,7 +153,7 @@ def bioinf_output_loss(output_type, true, pred, mask):
 #    masked_pred = tf.tanh(tf.boolean_mask(pred, mask))
     loss = tf.nn.l2_loss(masked_true - masked_pred)
   else:
-    print "ERROR INVALID OUTPUT TYPE", output_type
+    print("ERROR INVALID OUTPUT TYPE", output_type)
     
   return loss
     
@@ -172,7 +172,7 @@ def bioinf_output_nonlinearity(output_type, pred):
 #    non_linear_output = tf.tanh(pred)
     non_linear_output = tf.sigmoid(pred)
   else:
-    print "ERROR INVALID OUTPUT TYPE", output_type
+    print("ERROR INVALID OUTPUT TYPE", output_type)
     
     
   return non_linear_output
@@ -284,8 +284,8 @@ class brnn_network:
     # as well as the sequence masks that go along with the input data.
     
     
-    for i in xrange(0, num_batches(len(input_feat), batch_size)):
-      batch_ind = range(i*batch_size, np.minimum((i+1)*batch_size, len(input_feat)))
+    for i in range(0, num_batches(len(input_feat), batch_size)):
+      batch_ind = list(range(i*batch_size, np.minimum((i+1)*batch_size, len(input_feat))))
       batch_seq_lengths = [ seq_len[ind] for ind in batch_ind ]
       batch_max_length = max(batch_seq_lengths)
       batch_feat = np.array( [ np.concatenate((np.array(tmp), np.zeros((batch_max_length - tmp.shape[0], len(input_feat[0][0]))))) for tmp in [ input_feat[ind] for ind in batch_ind ] ] )
@@ -313,8 +313,8 @@ class brnn_network:
   def get_loss(self, input_feat, true_labels, labels_mask, labels_mask_encoded, seq_len, batch_size=500, keep_prob=1.0):
     np_output = np.zeros(num_batches(len(input_feat), batch_size))
     
-    for i in xrange(0, num_batches(len(input_feat), batch_size)):
-      batch_ind = range(i*batch_size, np.minimum((i+1)*batch_size, len(input_feat)))
+    for i in range(0, num_batches(len(input_feat), batch_size)):
+      batch_ind = list(range(i*batch_size, np.minimum((i+1)*batch_size, len(input_feat))))
       batch_seq_lengths = [ seq_len[ind] for ind in batch_ind ]
       batch_max_length = max(batch_seq_lengths)
       batch_feat = np.array( [ np.concatenate((np.array(tmp), np.zeros((batch_max_length - tmp.shape[0], len(input_feat[0][0]))))) for tmp in [ input_feat[ind] for ind in batch_ind ] ] )
