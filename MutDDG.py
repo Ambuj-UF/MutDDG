@@ -263,9 +263,9 @@ def main():
                         help='input sequence single line entry')
     parser.add_argument('--terminallog', type=str,
                         help='redirect stdout here')
-    parser.add_argument('--pH', type=int, default=7.0,
+    parser.add_argument('--pH', type=float, default=7.0,
                         help='pH')
-    parser.add_argument('--temperature', type=int, default=300.0,
+    parser.add_argument('--temperature', type=float, default=300.0,
                         help='Temperature')
     parser.add_argument('--output', type=str, default="output.txt", help='Path and filename write output to')
     args = parser.parse_args()
